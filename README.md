@@ -11,6 +11,24 @@ A Slack bot to move or delete entire threads from one channel to another, preser
 - **Easy to Use**: A simple message shortcut opens a modal to select the action and destination channel.
 - **Permission Tester**: Includes a `/test-permissions` slash command to diagnose setup issues.
 
+## Project Structure
+
+The project is organized with a clear separation of concerns to make it easier to maintain and extend.
+
+- `index.js`: The main entry point for running the bot locally. It imports the handlers and starts the Bolt app.
+- `lambda.js`: The entry point for the AWS Lambda deployment. It configures the app for a serverless environment.
+- `serverless.yml`: Configuration file for the Serverless Framework, defining the deployment settings for AWS Lambda.
+- `src/`: Contains the core application logic.
+  - `app.js`: Initializes and configures the Slack Bolt app and the user `WebClient`.
+  - `handlers/`: Contains the handlers for different Slack events.
+    - `commandHandler.js`: Handles the `/test-permissions` slash command.
+    - `shortcutHandler.js`: Handles the `copy_thread_shortcut` message shortcut.
+    - `viewHandler.js`: Handles the submission of the `copy_thread_modal`.
+  - `services/`: Contains services that abstract away external API calls.
+    - `slackService.js`: A dedicated service for all interactions with the Slack API, such as fetching messages, posting messages, and deleting messages.
+  - `utils/`: Contains utility functions that can be reused across the application.
+    - `mentionUtils.js`: Provides functions to strip mentions from messages to prevent re-notifying users.
+
 ## How it Works
 
 The bot is triggered by a message shortcut ("Copy Thread"). It then opens a modal asking the user if they want to:
