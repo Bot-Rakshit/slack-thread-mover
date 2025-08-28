@@ -1,8 +1,7 @@
-import { AwsLambdaReceiver } from '@slack/bolt';
 import pkg from '@slack/bolt';
 import { WebClient } from '@slack/web-api';
 
-const { App, LogLevel } = pkg;
+const { App, LogLevel, AwsLambdaReceiver } = pkg;
 
 // Create the Slack Bolt receiver for Lambda
 const awsLambdaReceiver = new AwsLambdaReceiver({

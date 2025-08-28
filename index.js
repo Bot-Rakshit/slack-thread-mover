@@ -2,9 +2,9 @@ import pkg from '@slack/bolt';
 import { WebClient } from '@slack/web-api';
 import dotenv from 'dotenv';
 
-dotenv.config();
-
 const { App, LogLevel } = pkg;
+
+dotenv.config();
 
 // Initializes your app with your bot token and signing secret
 const app = new App({
